@@ -4,8 +4,6 @@
 
 Get the current Ethereum price in the VS Code status bar:
 
-![Basic view](assets/basic.png)
-
 * E-U - means the eth-usd
 * E-B - means the eth-btc
 
