@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const settings = {
     bar: {},
     config: {},
-    url: 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=',
+    url: 'https://api.etherscan.io/api?module=stats&action=ethprice&apikey=',
     icons: {
         low: '🌤',
         normal: '🌧',
@@ -53,7 +53,7 @@ const renderBar = (message, icon) => {
 };
 
 const renderResult = data => {
-    const icon = data.result.SafeGasPrice > 100 ? settings.icons.high : data.result.SafeGasPrice > 10 ? settings.icons.normal : settings.icons.low;
+    const icon = data.result.ethusd > 5000 ? settings.icons.high : data.result.ethusd > 2000 ? settings.icons.normal : settings.icons.low;
     const note = data.message != 'OK' ? settings.messages.missed : '';
-    renderBar(`L: ${data.result.SafeGasPrice}, N: ${data.result.ProposeGasPrice}, H: ${data.result.FastGasPrice} ${note}`, icon);
+    renderBar(`E-U: ${data.result.ethusd}, E-B: ${data.result.ethbtc}`, icon);
 };
