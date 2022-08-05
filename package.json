@@ -1,18 +1,18 @@
 {
-    "name": "ethereum-gas-price",
-    "displayName": "Ethereum Gas Price",
-    "description": "Get current Ethereum gas price in the VS Code status bar",
+    "name": "ethereum-price",
+    "displayName": "Ethereum Price",
+    "description": "Get current Ethereum price in the VS Code status bar",
     "version": "1.0.1",
-    "publisher": "alexeevsergey",
-    "homepage": "https://github.com/monosux/vscode-ethereum-gas-price",
+    "publisher": "chowchikwan",
+    "homepage": "https://github.com/chowchikwan/vscode-ethereum-price",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/monosux/vscode-ethereum-gas-price.git"
+		"url": "https://github.com/chowchikwan/vscode-ethereum-price.git"
 	},
 	"bugs": {
-		"url": "https://github.com/monosux/vscode-ethereum-gas-price/issues"
+		"url": "https://github.com/chowchikwan/vscode-ethereum-price/issues"
 	},
-	"author": "Sergey Alexeev <alexeev.sergey.a@gmail.com>",
+	"author": "chowchikwan <chowchikwan000@gmail.com>",
 	"license": "MIT",
     "engines": {
         "vscode": "^1.50.0"
@@ -28,21 +28,21 @@
     "contributes": {
         "configuration": {
             "properties": {
-                "ethereum-gas-price.key": {
+                "ethereum-price.key": {
                     "type": "string",
                     "default": "",
                     "markdownDescription": "Enter the Etherscan API key. If you do not have one get your free API key here: [etherscan.io](https://etherscan.io/myapikey)"
                 },
-                "ethereum-gas-price.refreshInterval": {
+                "ethereum-price.refreshInterval": {
                     "type": "number",
                     "minimum": 1,
                     "default": 15,
                     "description": "Refresh interval in minutes"
                 },
-                "ethereum-gas-price.showIcons": {
+                "ethereum-price.showIcons": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Show icons near the gas price"
+                    "description": "Show icons near the price"
                 }
             }
         }
