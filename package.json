@@ -2,18 +2,18 @@
     "name": "ethereum-price",
     "displayName": "Ethereum Price",
     "description": "Get current Ethereum price in the VS Code status bar",
-    "version": "1.0.1",
+    "version": "1.0.4",
     "publisher": "chowchikwan",
     "homepage": "https://github.com/chowchikwan/vscode-ethereum-price",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/chowchikwan/vscode-ethereum-price.git"
-	},
-	"bugs": {
-		"url": "https://github.com/chowchikwan/vscode-ethereum-price/issues"
-	},
-	"author": "chowchikwan <chowchikwan000@gmail.com>",
-	"license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chowchikwan/vscode-ethereum-price.git"
+    },
+    "bugs": {
+        "url": "https://github.com/chowchikwan/vscode-ethereum-price/issues"
+    },
+    "author": "chowchikwan <chowchikwan000@gmail.com>",
+    "license": "MIT",
     "engines": {
         "vscode": "^1.50.0"
     },
@@ -28,10 +28,15 @@
     "contributes": {
         "configuration": {
             "properties": {
-                "ethereum-price.key": {
+                "ethereum-price.url": {
                     "type": "string",
                     "default": "",
-                    "markdownDescription": "Enter the Etherscan API key. If you do not have one get your free API key here: [etherscan.io](https://etherscan.io/myapikey)"
+                    "markdownDescription": "default: https://api.binance.com/api/v3/ticker/price?symbols="
+                },
+                "ethereum-price.symbols": {
+                    "type": "string",
+                    "default": "[%22BTCBUSD%22,%22ETHBUSD%22]",
+                    "markdownDescription": "eg: [%22BTCBUSD%22,%22ETHBUSD%22]"
                 },
                 "ethereum-price.refreshInterval": {
                     "type": "number",
