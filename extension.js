@@ -13,20 +13,20 @@ const settings = {
         error: '🚧'
     },
     messages: {
-        loading: 'Updating gas prices...',
+        loading: 'Updating eth prices...',
         error: 'Connection error',
         missed: '(Missed API key)'
     }
 };
 
 exports.activate = context => {
-    settings.config = vscode.workspace.getConfiguration('ethereum-gas-price');
+    settings.config = vscode.workspace.getConfiguration('ethereum-price');
     settings.bar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-    vscode.commands.registerCommand('ethereum-gas-price.update', update);
-    settings.bar.command = 'ethereum-gas-price.update';
+    vscode.commands.registerCommand('ethereum-price.update', update);
+    settings.bar.command = 'ethereum-price.update';
     context.subscriptions.push(settings.bar);
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
-        settings.config = vscode.workspace.getConfiguration('ethereum-gas-price');
+        settings.config = vscode.workspace.getConfiguration('ethereum-price');
         update();
     }));
     settings.bar.show();
