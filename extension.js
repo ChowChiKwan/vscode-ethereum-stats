@@ -4,22 +4,27 @@ const fetch = require('node-fetch');
 const settings = {
     bar: {},
     config: {},
-    url: 'https://api.etherscan.io/api?module=stats&action=ethprice&apikey=',
+    url: 'https://api.binance.com/api/v3/ticker/price?symbols=',
+    // url: 'https://api.etherscan.io/api?module=stats&action=ethprice&apikey=',
     icons: {
         low: '🌤',
         normal: '🌧',
         high: '🌩',
+        BTCBUSD: '😋',
+        ETHBUSD: '😍',
+        HTUSDT: '🤣',
         loading: '🚀',
         error: '🚧'
     },
     messages: {
-        loading: 'Updating eth prices...',
+        loading: 'Updating prices...',
         error: 'Connection error',
         missed: '(Missed API key)'
     }
 };
 
 exports.activate = context => {
+    let timer;
     settings.config = vscode.workspace.getConfiguration('ethereum-price');
     settings.bar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
     vscode.commands.registerCommand('ethereum-price.update', update);
@@ -27,11 +32,13 @@ exports.activate = context => {
     context.subscriptions.push(settings.bar);
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
         settings.config = vscode.workspace.getConfiguration('ethereum-price');
+        clearInterval(timer);
         update();
+        timer = setInterval(update, 1000 * settings.config.refreshInterval);
     }));
     settings.bar.show();
     update();
-    setInterval(update, 60000 * settings.config.refreshInterval);
+    timer = setInterval(update, 1000 * settings.config.refreshInterval);
 };
 
 exports.deactivate = () => {};
@@ -39,10 +46,14 @@ exports.deactivate = () => {};
 const update = async () => {
     renderBar(settings.messages.loading, settings.icons.loading);
     try {
-        const response = await fetch(`${settings.url}${settings.config.key}`);
+        const response = await fetch(`${settings.config.url || settings.url}${settings.config.symbols}`);
+        const ht = await fetch('https://api.huobi.pro/market/detail/merged?symbol=htusdt');
+        const htData = await ht.json();
         const data = await response.json();
-        if (data.status != 1) throw 'API error';
-        renderResult(data);
+        renderResult([...data, {
+            symbol: 'HTUSDT',
+            price: htData.tick.close,
+        }]);
     } catch(e) {
         renderBar(settings.messages.error, settings.icons.error);
     }
@@ -53,7 +64,6 @@ const renderBar = (message, icon) => {
 };
 
 const renderResult = data => {
-    const icon = data.result.ethusd > 5000 ? settings.icons.high : data.result.ethusd > 2000 ? settings.icons.normal : settings.icons.low;
-    const note = data.message != 'OK' ? settings.messages.missed : '';
-    renderBar(`E-U: ${data.result.ethusd}, E-B: ${data.result.ethbtc}`, icon);
+    const text = data.map(({ symbol, price }) => `${symbol}: ${Number(price).toFixed(2)}`).join(', ');
+    renderBar(text, settings.icons.loading);
 };
