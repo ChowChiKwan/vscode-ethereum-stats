@@ -44,16 +44,11 @@ exports.activate = context => {
 exports.deactivate = () => {};
 
 const update = async () => {
-    renderBar(settings.messages.loading, settings.icons.loading);
+    // renderBar(settings.messages.loading, settings.icons.loading);
     try {
         const response = await fetch(`${settings.config.url || settings.url}${settings.config.symbols}`);
-        const ht = await fetch('https://api.huobi.pro/market/detail/merged?symbol=htusdt');
-        const htData = await ht.json();
         const data = await response.json();
-        renderResult([...data, {
-            symbol: 'HTUSDT',
-            price: htData.tick.close,
-        }]);
+        renderResult(data);
     } catch(e) {
         renderBar(settings.messages.error, settings.icons.error);
     }
@@ -64,6 +59,6 @@ const renderBar = (message, icon) => {
 };
 
 const renderResult = data => {
-    const text = data.map(({ symbol, price }) => `${symbol}: ${Number(price).toFixed(2)}`).join(', ');
+    const text = data.map(({ symbol, price }) => `${symbol}: ${Number(price).toFixed(3)}`).join(', ');
     renderBar(text, settings.icons.loading);
 };
