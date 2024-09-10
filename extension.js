@@ -59,6 +59,10 @@ const renderBar = (message, icon) => {
 };
 
 const renderResult = data => {
-    const text = data.map(({ symbol, price }) => `${symbol}: ${Number(price).toFixed(3)}`).join(', ');
+    const text = data.map(({ symbol, price }) => {
+        const numberPrice = Number(price);
+        const decimal = numberPrice >= 10 ? 2 : 4;
+        return `${symbol.replace('USDT', '/U')}: ${numberPrice.toFixed(decimal)}`;
+    }).join(', ');
     renderBar(text, settings.icons.loading);
 };
