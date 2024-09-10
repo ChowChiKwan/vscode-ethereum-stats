@@ -1,8 +1,8 @@
 {
     "name": "ethereum-price",
     "displayName": "Ethereum Price",
-    "description": "Get current Ethereum price in the VS Code status bar",
-    "version": "1.0.4",
+    "description": "Get Price in the VS Code status bar",
+    "version": "1.0.7",
     "publisher": "chowchikwan",
     "homepage": "https://github.com/chowchikwan/vscode-ethereum-price",
     "repository": {
@@ -42,7 +42,7 @@
                     "type": "number",
                     "minimum": 1,
                     "default": 15,
-                    "description": "Refresh interval in minutes"
+                    "description": "Refresh interval in seconds"
                 },
                 "ethereum-price.showIcons": {
                     "type": "boolean",
