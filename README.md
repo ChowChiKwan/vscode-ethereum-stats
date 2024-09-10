@@ -2,17 +2,15 @@
 
 ## About
 
-Get the current Ethereum price in the VS Code status bar:
+Get the crypto price in the VS Code status bar
+```bash
+npm install vsce -g
 
-* E-U - means the eth-usd
-* E-B - means the eth-btc
+vsce login chowchikwan
 
-The extension shows emoji to indicate the current price status:
+https://dev.azure.com/chowchikwan/_usersSettings/tokens
+# get access token
 
-* 🌤 - means the price is low
-* 🌧 - means the price is high
-* 🌩 - means the price is extremely high
+vsce publish --no-yarn
 
-## Need Help
-
-If you need any help, please contact me via GitHub issues page: [GitHub](https://github.com/chowchikwan/vscode-ethereum-price/issues)
+```
